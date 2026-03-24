@@ -1,0 +1,33 @@
+version: 0.1
+component: build
+timeoutInSeconds: 300
+shell: bash
+
+steps:
+  - type: Command
+    name: "Debug Project Files"
+    command: |
+      echo "Current directory:"
+      pwd
+      echo "Project structure:"
+      ls -R
+
+  - type: Command
+    name: "Validate HTML file"
+    command: |
+      if [ -f "index.html" ]; then
+        echo "index.html found ✅"
+      else
+        echo "index.html missing ❌"
+        exit 1
+      fi
+
+  - type: Command
+    name: "Build Complete"
+    command: |
+      echo "Static website ready for deployment 🚀"
+
+outputArtifacts:
+  - name: static_site
+    type: BINARY
+    location: "*.html,*.css,*.js"
