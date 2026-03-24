@@ -5,29 +5,20 @@ shell: bash
 
 steps:
   - type: Command
-    name: "Debug Project Files"
+    name: "Debug Files"
     command: |
       echo "Current directory:"
       pwd
-      echo "Project structure:"
+      echo "All files:"
       ls -R
 
   - type: Command
-    name: "Validate HTML file"
+    name: "Package Application"
     command: |
-      if [ -f "index.html" ]; then
-        echo "index.html found ✅"
-      else
-        echo "index.html missing ❌"
-        exit 1
-      fi
-
-  - type: Command
-    name: "Build Complete"
-    command: |
-      echo "Static website ready for deployment 🚀"
+      echo "Zipping project..."
+      zip -r app.zip .
 
 outputArtifacts:
-  - name: static_site
+  - name: app_bundle
     type: BINARY
-    location: "*.html,*.css,*.js"
+    location: "app.zip"
